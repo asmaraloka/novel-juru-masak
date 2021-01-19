@@ -1,0 +1,296 @@
+% universal settings
+\documentclass[smalldemyvopaper,11pt,twoside,onecolumn,openright,extrafontsizes]{memoir}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[osf]{Alegreya,AlegreyaSans}
+
+% PACKAGE DEFINITION
+% typographical packages
+\usepackage{microtype} % for micro-typographical adjustments
+\usepackage{setspace} % for line spacing
+\usepackage{lettrine} % for drop caps and awesome chapter beginnings
+\usepackage{titlesec} % for manipulation of chapter titles
+
+% for placeholder text
+\usepackage{lipsum} % to generate Lorem Ipsum
+
+% other
+\usepackage{calc}
+\usepackage{hologo}
+\usepackage[hidelinks]{hyperref}
+%\usepackage{showframe}
+\usepackage{soul}
+
+% PHYSICAL DOCUMENT SETUP
+% media settings
+\setstocksize{8.5in}{5.675in}
+\settrimmedsize{8.5in}{5.5in}{*}
+\setbinding{0.175in}
+\setlrmarginsandblock{0.611in}{1.222in}{*}
+\setulmarginsandblock{0.722in}{1.545in}{*}
+
+% defining the title and the author
+%\title{\LaTeX{} ePub Template}
+%\title{\textsc{How I Started to Love {\fontfamily{cmr}\selectfont\LaTeX{}}}}
+\title{Juru Masak}
+\author{Naru Aika}
+\newcommand{\ISBN}{0-000-00000-2}
+\newcommand{\press}{}
+
+% custom second title page
+\makeatletter
+\newcommand*\halftitlepage{\begingroup % Misericords, T&H p 153
+  \setlength\drop{0.1\textheight}
+  \begin{center}
+  \vspace*{\drop}
+  \rule{\textwidth}{0in}\par
+  {\Large\textsc\thetitle\par}
+  \rule{\textwidth}{0in}\par
+  \vfill
+  \end{center}
+\endgroup}
+\makeatother
+
+% custom title page
+\thispagestyle{empty}
+\makeatletter
+\newlength\drop{}
+\newcommand*\titleM{\begingroup % Misericords, T&H p 153
+  \setlength\drop{0.15\textheight}
+  \begin{center}
+  \vspace*{\drop}
+  \rule{\textwidth}{0in}\par
+  {\HUGE\textsc\thetitle\par}
+  \rule{\textwidth}{0in}\par
+  {\Large\textit\theauthor\par}
+  \vfill
+  {\Large\scshape\press}
+  \end{center}
+\endgroup}
+\makeatother
+
+% chapter title manipulation
+% padding with zero
+\renewcommand*\thechapter{\ifnum\value{chapter}<10 0\fi\arabic{chapter}}
+% chapter title display
+\titleformat
+{\chapter}
+[display]
+{\normalfont\scshape\huge}
+{\HUGE\thechapter\centering}
+{0pt}
+{\vspace{18pt}\centering}[\vspace{42pt}]
+
+% typographical settings for the body text
+\setlength{\parskip}{0em}
+\linespread{1.09}
+
+% HEADER AND FOOTER MANIPULATION
+  % for normal pages
+  \nouppercaseheads{}
+  \headsep = 0.16in
+  \makepagestyle{mystyle}
+  \setlength{\headwidth}{\dimexpr\textwidth+\marginparsep+\marginparwidth\relax}
+  \makerunningwidth{mystyle}{\headwidth}
+  \makeevenhead{mystyle}{}{\textsf{\scriptsize\scshape\thetitle}}{}
+  \makeoddhead{mystyle}{}{\textsf{\scriptsize\scshape\leftmark}}{}
+  \makeevenfoot{mystyle}{}{\textsf{\scriptsize\thepage}}{}
+  \makeoddfoot{mystyle}{}{\textsf{\scriptsize\thepage}}{}
+  \makeatletter
+  \makepsmarks{mystyle}{%
+  \createmark{chapter}{left}{nonumber}{\@chapapp\ }{.\ }}
+  \makeatother
+  % for pages where chapters begin
+  \makepagestyle{plain}
+  \makerunningwidth{plain}{\headwidth}
+  \makeevenfoot{plain}{}{}{}
+  \makeoddfoot{plain}{}{}{}
+  \pagestyle{mystyle}
+% END HEADER AND FOOTER MANIPULATION
+
+% table of contents customisation
+\renewcommand\contentsname{\normalfont\scshape Daftar Isi}
+\renewcommand\cftchapterfont{\normalfont}
+\renewcommand{\cftchapterpagefont}{\normalfont}
+\renewcommand{\printtoctitle}{\centering\Huge}
+
+% layout check and fix
+\checkandfixthelayout{}
+% \fixpdflayout
+
+% custom
+\newcommand\separator{
+  \begin{center}
+    \(\ast~\ast~\ast\)
+  \end{center}
+}
+
+% BEGIN THE DOCUMENT
+\begin{document}
+\pagestyle{empty}
+% the half title page
+% \halftitlepage
+% \cleardoublepage
+% the title page
+\titleM{}
+\clearpage
+% copyright page
+% \noindent{\small{This novel is entirely a work of fiction. The names, characters and incidents portrayed in it are the product of the author's imagination. Any resemblance to actual persons, living or dead, or events or localities is entirely coincidental.\par\vfill\noindent Paperback Edition\space\today\\ISBN\space\ISBN\\\copyright\space\theauthor. All rights reserved.\par\vfill\noindent\theauthor\space asserts the moral right to be identified as the author of this work. All rights reserved in all media. No part of this publication may be reproduced, stored in a retrieval system, or transmitted, in any form, or by any means, electronic, mechanical, photocopying, recording or otherwise, without the prior written permission of the author and/or the publisher.\par}}
+% \clearpage
+
+% dedication
+% \begin{center}
+% \itshape{\noindent{...}}
+% \end{center}
+
+% begin front matter
+\frontmatter{}
+\pagestyle{mystyle}
+
+% preface
+\chapter*{Prakata}
+
+\hyphenation{ge-ne-ra-lis}
+
+Apa yang umumnya orang-orang pikirkan tentang kita selaku seseorang yang mengerjakan sesuatu? Misalnya seorang dokter, guru, atau juru masak? Tiap-tiap pekerjaan bertujuan menyelesaikan isu tertentu dalam kehidupan nyata, entah itu problemnya sendiri atau orang lain. Boleh jadi sangat spesifik, yang berarti setiap orang dapat menjadi seorang ahli ketimbang hanya menjadi generalis. Sebagai ilmuwan komputer, kita mungkin lebih tertarik pada cara memecahkan persoalan komputasi, sementara yang lain mungkin lebih berupaya mempelajari bagaimana manusia berinteraksi dengan komputer. Hal demikian tidak sedikit pun berarti menjadi seorang yang memiliki minat mencakup beberapa bidang yang berbeda itu salah atau bagaimana.
+
+\hyphenation{me-ma-sak ter-de-ngar ber-u-sa-ha}
+
+Tidak ada pekerjaan yang tidak penting di dunia ini. Kita mungkin memikirkan seberapa banyak orang yang terlibat oleh suatu perbuatan dan lainnya. Namun tetap saja, semua orang berbuat apa yang mereka bisa dan mau. Kali saja bukan gairah mereka, tapi itu bukan masalah sama sekali. Kita hanya tidak memiliki jalan keluar dari situasi untuk menyangkal bahwa orang-orang memiliki sedikit banyak kontribusi dalam kehidupan ini. Kita semua saling mengisi, bukan begitu? Oleh sebab itu, tidak ada alasan untuk menjadi sombong atau malu menjadi seseorang yang hendak belajar dan pandai dalam sesuatu. Ngomong-ngomong, aku bertanya-tanya bagaimana rasanya menjadi seorang pemrogram komputer yang berusaha memasak panekuk dengan gadis kecilnya? Apakah itu terdengar sedikit arogan? Tidak mungkin! Sebab, kali ini saya akan bercerita mengenai itu.
+
+Saya telah berbagi sebuah ponsel pintar dengan ibu saya. Bukan berati saya tidak mampu membelikannya satu yang baru, melainkan ibu saya akan menolak untuk membuang miliknya yang sudah ketinggalan zaman. Memang masih dapat beroperasi, namun leletnya minta ampun. Sejujurnya, berbagi semacam ini baik-baik saja. Nyatanya, saya malah bersyukur sebab YouTube tidak bisa lagi mengenali pola perilaku saya. Ha ha ha \dots
+
+\hyphenation{me-ne-rang-kan ter-ku-bur}
+
+Berangkat dari situ, saya mendapatkan ide untuk menerangkan pemrograman kepada orang-orang yang baru akan belajar. Dengan memeriksa beranda saya yang terkubur oleh semua jenis video memasak. Dengan beragam hidangan baru yang belum pernah saya rasakan sebelumnya, tetapi belakangan ini terhidang di meja makan kami. Izinkan saya untuk bercerita bagaimana putri kecil saya belajar membuat masakannya sendiri untuk pertama kalinya!
+
+Saya berpura-pura memiliki seorang anak perempuan di sini. Namun sebetulnya, saya hanya membuat sebuah perumpamaan di mana komputer tidak tahu cara memasak. Misalkan, saya harus mengajarkan seorang gadis kecil yang tidak memiliki pengetahuan dan pengalaman sama sekali. Bahkan dia tidak tahu cara memegang pengocok telur dengan benar. Oleh karena itu, saya harus memikirkan metode untuk berbicara kepadanya seterang dan segamblang mungkin.
+
+Saya tahu betul bahwa seorang gadis mana pun yang berusia lima tahun itu bisa berpikir sendiri, sedangkan tidak bagi komputer, tidak bisa dan tidak akan. Itulah yang membuat perbedaan yang besar sekali! Daripadanya, jangan menilai atas kekeliruan dari apa yang telah saya katakan sebelumnya. Saya hanya mencoba untuk membuat sebuah pendekatan dengan banyak perumpamaan. Karena perumpamaan sering kali lebih mudah dipahami oleh orang-orang baru. Ada baiknya mengutip apa yang lazim diutarakan: \textit{explain like I am five}.
+
+\hyphenation{de-ngan}
+
+Berbekal pengalaman saya beberapa kali membagikan pengetahuan serta wawasan kepada adik-adik tingkat saya semasa kuliah kemarin, saya merasa cukup tertarik untuk menulis sebuah cerpen atau novel demi memperkenalkan dunia teknologi dan informasi kepada para  pembaca. Novel yang satu ini tidak mengharuskan para pembaca memahami segalanya, sebab ceritanya cenderung hanya memberikan proses berpikir kritis menuju pembelajaran pemrograman. Saat menulis novel ini, sebetulnya saya juga sedang menulis novel lain bertajuk ``Komputer'' sebagai prekuelnya. Entah yang mana yang akan rampung duluan. Lantaran kedua novel tersebut merupakan karya tulis pertama saya, saya hanya bisa berharap supaya para pembaca dapat memperoleh berbagai manfaat sesuai dengan cita-cita saya. Akhir kata, selamat membaca!
+
+% acknowledgements
+% \chapter*{Ucapan Terima Kasih}
+% \lipsum[1-9]
+
+% table of contents
+% \clearpage
+% \tableofcontents*
+
+% begin main matter
+\mainmatter{}
+
+% genre
+% fiksi ilmiah
+
+% tokoh
+% aku (egg), nismara, dan candra
+
+% gagasan cerita
+% - apa itu berpikir komputasi?
+% - apa yang perlu dipelajari dalam pemrograman? https://www.youtube.com/playlist?list=PLzdnOPI1iJNdVYhNyXeP4FsbSH_AkUhxB, https://www.youtube.com/playlist?list=PLzdnOPI1iJNfV5ljCxR8BZWJRT_m_6CpB
+% - bagaimana merekayasa perangkat lunak?
+
+\chapter*{Prolog}
+
+Liburan hari kesatu kali ini mungkin akan berakhir tidak jauh berbeda dengan sediakala. Kecuali jikalau aku yang masih terduduk sebentar di pinggiran sofa lipat di ruang tengah memperturutkan dorongan hati untuk kembali tidur, melupakan segenap proyek akhir tahun yang telah berhasil menggemparkan seluruh pekerja di kantor. Perlahan kutepuk-tepuk pipi yang agak tembam itu, milik si kecil, Nismara, yang masih pulas. Nismara menggeliat kecil sejenak sebelum kemudian ikut duduk bersamaku sementara kedua matanya terpejam.
+
+``Pagi, Ayah,'' sapanya sambil menahan kuap dengan telapak tangannya yang mungil.
+
+``Pagi, sayang.''
+
+\hyphenation{ma-sih pe-rin-tah me-ram-pas}
+
+Kuhampiri si bungsu, Candra, yang ternyata masih anteng dalam buaian dan lalu pergi wudu. Pada masa pandemi begini, musala terdekat dari apartemenku tidak dibuka sama sekali dan orang-orang dilarang mengerjakan salat berjemaah di sana. Meskipun pada awalnya kami sangat tidak senang dengan keputusan pemerintah setempat itu, namun kami berusaha ikhlas mematuhi perintah agama. Guru mengaji kami sering bilang bahwa pemimpin itu wajib dipatuhi selama suruhannya bukan untuk berbuat kemusyrikan, sekalipun bila ia suka merampas harta dan memukul punggung kita.
+
+\hyphenation{te-le-ken-da-li}
+
+Menjelang pukul enam, dengan semangat sekali Nismara mengambil telekendali dan menunggu film kartun kesayangannya diputar di saluran televisi lokal khusus anak-anak. Sementara kumasih disibukkan oleh perkara popok dan susu untuk si bungsu, menyapu lantai kayu yang sudah mulai banyak terkelupas, menjemur gulugan karpet yang jarang dipakai, mengemas pakaian-pakaian kotor untuk dibawa ke layanan penatu, lalu melongok ke dalam lemari pendingin yang kosong melompong. Mendadak sontak Nismara menarik-narik ujung lingkar pinggang kemejaku, meloncat-loncat kecil sambil menunjuk ke arah televisi yang sedari tadi ribut sendiri.
+
+``Ayah! Ayah!''
+
+Aku menengok. Mata kami bertautan sejenak. Bergegas aku membungkuk, duduk bertinggung.
+
+``Ya, Nismara?''
+
+``Apa itu, Ayah? Kelihatannya manis dan lezat sekali!''
+
+Aku mengelih dari kejauhan menuju sebuah televisi kabel yang agak usang, mencari tahu apa yang telah membuat putri semata wayangku begitu semringah.
+
+``Oh, itu panekuk, sayang. Nismara mau satu untuk sarapan pagi ini 'kan?''
+
+``I-iya!'' Nismara mengangguk kecil, menyembunyikan kedua tangannya tergenggam di belakang, ``B-bolehkah?''
+
+``Barang tentu boleh!'' ujarku sambil mencolek ujung hidungnya nan molek dengan jari telunjukku. ``Mari kita mengacaukan dapur kecil kita ini!''
+
+\hyphenation{ke-nya-ta-an meng-an-dal-kan}
+
+``Asyik!'' serunya. Sementara aku yang sedang mencoba memanjakan Nismara---seorang anak perempuan yang hampir genap lima tahun usianya---tengah melupakan kenyataan bahwa aku sendiri bahkan belum pernah menyantap makanan berkalori tinggi semacam itu. Maka bagaimana aku akan memasakkannya? Melihat Nismara sesekali amat bungah seperti itu, aku tidak sampai hati mengecewakannya. ``Baiklah, kalau begitu mari kita mengandalkan Google saja!'' pikirku sembari merahasiakan karut-marut di wajahku.
+
+\hyphenation{ber-ga-bung}
+
+Seusai mengelap peluh yang menetes di kening dari pekerjaan rumah tangga yang tak kunjung habisnya, setelah berbulan-bulan lamanya terbengkalai lantaran kesibukkan harianku sebagai seorang insinyur muda di sebuah instansi yang kurang tersohor, cepat-cepat aku bergabung bersama Nismara dan Candra---seorang anak laki-laki setahun lebih muda dari kakak satu-satunya---yang saat itu sedang berkemul sambil melongo di muka sebuah tablet berukuran tujuh inci. Aku pun turut melongo dan tergiur dengan beraneka ragam panekuk ala Barat yang serba terlampau mewah itu.
+
+Nismara yang terus menggulirkan layar multisentuh sejak satu atau dua menit yang lalu akhirnya berhenti untuk beberapa saat. Matanya tertuju kepada sebuah foto masakan gurih dan asin dengan isian daging giling, telur dan bawang yang disuguhkan bertumpuk-tumpuk ditemani semangkuk kecil kuah cuka. Aku mengambil inisiatif untuk menjelaskan.
+
+``Ah, itu martabak, Nismara,'' tegasku dan lalu menambahkan, ``Itu panekuk juga.''
+
+\hyphenation{ka-re-na}
+
+Dia mengernyitkan alis dan dahinya, menatapku lekat-lekat. Aku menangkap jelas kebingungan yang tersirat pada air mukanya. Bukan karena martabak, tapi karena kubilang panekuk. Aku tidak pernah menduga akan berada di dalam situasi canggung untuk menjelaskan hakikat sebutan panekuk.
+
+\hyphenation{di-san-tap ku-de-ngar di-go-reng}
+
+Memahami berbagai istilah berikut konteksnya itu sangatlah penting, terutama dalam bahasa tutur. Dengan pertimbangan kejadian di masa silam ketika aku salah kaprah mengartikan mendoan sebagai tempe setengah matang yang masih harus kugoreng kembali sebelum disantap. Berkali-kali aku begitu. Ibuku hanya mengeleng-gelengkan kepalanya dengan iba sewaktu datang ke apartemenku sendirian. Ternyata ungkapan setengah matang yang kudengar dari penjualnya berarti bahwa mendoan tidak digoreng hingga kering.
+
+\hyphenation{pe-nge-ta-hu-an ba-gai-ma-na}
+
+Ketika masih kecil, aku belajar tentang makna kata-kata dengan cara mengalaminya sendiri. Itu merupakan cara terbaik untuk belajar sesuatu yang baru. Namun ketika tidak memiliki kesempatan untuk itu, aku akan datang hanya untuk mendengarkan jawaban dari orang-orang dewasa yang mencoba sebisa mungkin. Biasanya mereka akan menyangkutpautkannya dengan semua pengetahuan dan pengalaman yang kumiliki saat itu. Itu memang cara terbaik untuk mengajarkan suatu hal baru. Dengan kejadian panekuk hari ini, aku mulai belajar bagaimana menggantikan orang tuaku mengajari anak-anak yang serba ingin tahu.
+
+\hyphenation{me-nya-da-ri}
+
+``Panekuk itu kue pipih tipis yang manis.'' Pada awalnya pun aku mengira demikian. Tapi kemudian aku menyadari bahwa terkadang panekuk bisa terlihat sangat tebal dan lembut, seperti sufel Jepang. Atau sangat tipis, dikenal sebagai kerepes, yang populer di banyak negara Eropa. Panekuk bisa dibuat dari adonan kering atau basah dari gandum atau tepung beras.
+
+\hyphenation{men-da-pat-kan}
+
+Dalam iklan-iklan, panekuk biasanya berbentuk bulat pipih. Tapi kenyataannya, itu tergantung dari bentuk penggorenganku. Bisa saja aku memiliki pan khusus untuk panekuk. Atau mungkin aku akan lebih suka mendapatkan berbagai cetakan panekuk yang terbuat dari silikon tahan panas. Dengan begitu, aku bisa berbuat banyak penghematan. Selain itu, terkadang kutemukan panekuk dibiarkan polos, kecuali digulung atau dilipat.
+
+\hyphenation{pen-dam-ping be-be-ra-pa}
+
+Tidak mesti manis, panekuk bisa gurih atau bahkan pedas. Orang-orang memutuskan jenis taburan atau pugasan apa yang ingin ditaruh di atasnya, atau di dalamnya. Dapat disajikan sebagai kudapan atau makanan pendamping selama jam sarapan dengan sirup maple, madu, olesan buah, saus cokelat, susu kental manis, es krim vanila, yoghurt, keju parut, gula kayu manis, dan lain-lain. Atau sebagai hidangan utama dengan sayur-mayur, telur dadar, daging cincang, makanan laut, atau apapun. Tetapi beberapa orang cenderung lebih suka panekuk apa adanya.
+
+Sampailah aku di kesimpulan bahwa istilah panekuk dalam bahasa Indonesia berpadanan dengan istilah \textit{pancake} dalam bahasa asing. Maka aku meralat rumusanku sendiri.
+
+``Eh, bukan, bukan \dots Panekuk itu kue apapun yang dimasak di atas pan. Lantaran martabak itu dimasak di atas pan, maka martabak juga bisa dibilang panekuk.''
+
+``Oh, begitu, ya.''
+
+Menemukan satu porsi panekuk yang menggugah hati, Nismara melanjutkan.
+
+``Coba lihat ini, Ayah. Aku sangat menyukai warna merah ini, maksudku, stroberi!''
+
+``Wah, tapi ini bukan stroberi, Nismara, meskipun terlihat mirip sekali.''
+
+``Lalu ini apa, Ayah? Familinya stroberi, kukira?''
+
+Dia membuatku tertawa, ``Nah, Nismara akan mengetahuinya setelah mencicipinya sendiri.''
+
+Nismara mencoba merapal tajuk artikel resep di sebelah potret berhias buah-buahan yang merah-merah itu.
+
+``Pa-ne-kuk ras-be-ri, ah!'' ujarnya terbata-bata. Nismara menoleh kepadaku dengan tatapan bertanya, aku mangut-mangut membenarkan pengejaannya itu.
+
+\chapter{Si Kecil dan Panekuk}
+
+\dots
+
+% \chapter{Epilog}
+
+% Gadis belia itu, Nismara, mencoba mengajarkan anak-anak didiknya dengan gaya yang memesona layaknya guru muda profesional, lulusan sarjana terbaik di angkatannya. Terbit jelas dalam pikirannya bagaimana gerak-gerik ayahnya dulu yang sama-sama ingin memperkenalkan dunia seorang pemrogram komputer. \dots
+
+% begin back matter
+
+\end{document}
+% END THE DOCUMENT
